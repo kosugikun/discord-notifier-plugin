@@ -43,7 +43,7 @@ public class WebhookPublisher extends Notifier {
     private boolean showChangeset;
     private boolean sendLogFile;
     private boolean sendStartNotification;
-    private static final String NAME = "Discord Notifier";
+    private static final String NAME = "Discord Notifier JP";
     private static final String VERSION = "1.4.14";
 
     @DataBoundConstructor
@@ -153,23 +153,23 @@ public class WebhookPublisher extends Notifier {
                 JenkinsLocationConfiguration globalConfig = JenkinsLocationConfiguration.get();
                 wh.setStatus(DiscordWebhook.StatusColor.GREEN);
                 if (this.statusTitle != null && !this.statusTitle.isEmpty()) {
-                    wh.setTitle("Build started: " + env.expand(this.statusTitle));
+                    wh.setTitle("ビルド開始: " + env.expand(this.statusTitle));
                 } else {
-                    wh.setTitle("Build started: " + project.getDisplayName() + " #" + build.getId());
+                    wh.setTitle("ビルド開始: " + project.getDisplayName() + " #" + build.getId());
                 }
                 String branchNameString = "";
                 if (branchName != null && !branchName.isEmpty()) {
-                    branchNameString = "**Branch:** " + env.expand(branchName) + "\n";
+                    branchNameString = "**ブランチ:** " + env.expand(branchName) + "\n";
                 }
                 if (this.enableUrlLinking) {
                     String url = globalConfig.getUrl() + build.getUrl();
                     description = branchNameString
-                            + "**Build:** "
+                            + "**ビルド:** "
                             + getMarkdownHyperlink(build.getId(), url);
                     wh.setURL(url);
                 } else {
                     description = branchNameString
-                            + "**Build:** "
+                            + "**ビルド:** "
                             + build.getId();
                 }
                 wh.setDescription(new EmbedDescription(build, globalConfig, description, false, false).toString());
@@ -244,7 +244,7 @@ public class WebhookPublisher extends Notifier {
 
         String branchNameString = "";
         if (branchName != null && !branchName.isEmpty()) {
-            branchNameString = "**Branch:** " + env.expand(branchName) + "\n";
+            branchNameString = "**ブランチ:** " + env.expand(branchName) + "\n";
         }
 
         String descriptionPrefix;
@@ -252,16 +252,16 @@ public class WebhookPublisher extends Notifier {
         if (this.enableUrlLinking) {
             String url = globalConfig.getUrl() + build.getUrl();
             descriptionPrefix = branchNameString
-                    + "**Build:** "
+                    + "**ビルド:** "
                     + getMarkdownHyperlink(build.getId(), url)
-                    + "\n**Status:** "
+                    + "\n**ステータス:** "
                     + getMarkdownHyperlink(build.getResult().toString().toLowerCase(), url) + "\n";
             wh.setURL(url);
         } else {
             descriptionPrefix = branchNameString
-                    + "**Build:** "
+                    + "**ビルド:** "
                     + build.getId()
-                    + "\n**Status:** "
+                    + "\n**ステータス:** "
                     + build.getResult().toString().toLowerCase() + "\n";
         }
         descriptionPrefix += combinationString;

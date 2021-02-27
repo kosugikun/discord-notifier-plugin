@@ -161,7 +161,7 @@ public class DiscordPipelineStep extends AbstractStepImpl {
 
         @Override
         protected Void run() throws Exception {
-            listener.getLogger().println("Sending notification to Discord.");
+            listener.getLogger().println("Discordに通知を送信します。");
 
             DiscordWebhook.StatusColor statusColor;
             statusColor = StatusColor.YELLOW;
@@ -178,7 +178,7 @@ public class DiscordPipelineStep extends AbstractStepImpl {
             } else if (step.getResult().equals(Result.ABORTED.toString())) {
                 statusColor = StatusColor.GREY;
             } else {
-                listener.getLogger().println(step.getResult() + " is not a valid result");
+                listener.getLogger().println(step.getResult() + " は、有効な結果ではありません");
             }
 
             DiscordWebhook wh = new DiscordWebhook(step.getWebhookURL());

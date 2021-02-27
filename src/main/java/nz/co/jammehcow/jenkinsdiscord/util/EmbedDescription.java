@@ -39,9 +39,9 @@ public class EmbedDescription {
             for (ChangeLogSet i : changeSets)
                 changes.addAll(Arrays.asList(i.getItems()));
             if (changes.isEmpty()) {
-                this.changesList.add("\n*No changes.*\n");
+                this.changesList.add("\n*更新内容はありません。*\n");
             } else {
-                this.changesList.add("\n**Changes:**\n");
+                this.changesList.add("\n**更新内容:**\n");
                 for (Object o : changes) {
                     ChangeLogSet.Entry entry = (ChangeLogSet.Entry) o;
                     String commitID;
@@ -60,12 +60,13 @@ public class EmbedDescription {
             }
         }
 
+        // artifactsの日本語訳は「成果物」であってるのかな。
         if (enableArtifactsList) {
-            this.artifactsList.add("\n**Artifacts:**\n");
+            this.artifactsList.add("\n**成果物:**\n");
             //noinspection unchecked
             List<Run.Artifact> artifacts = build.getArtifacts();
             if (artifacts.size() == 0) {
-                this.artifactsList.add("\n*No artifacts saved.*");
+                this.artifactsList.add("\n*保存された成果物はありません。*");
             } else {
                 for (Run.Artifact artifact : artifacts) {
                     this.artifactsList.add(" - " + artifactsURL + artifact.getHref() + "\n");
